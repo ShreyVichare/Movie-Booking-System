@@ -64,19 +64,16 @@ public class MovieService {
     public Movie updateMovie(Long id, MovieDto movieDto) {
 
         Movie existingMovie = movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No Movie found for the given Id " + id));
+                .orElseThrow(() -> new RuntimeException("Movie not found for ID " + id));
 
-        Movie updatedMovie = Movie.builder()
-                .id(existingMovie.getId())   // IMPORTANT: keep the same ID
-                .title(movieDto.getTitle())
-                .description(movieDto.getDescription())
-                .duration(movieDto.getDuration())
-                .genre(movieDto.getGenre())
-                .releaseDate(movieDto.getReleaseDate())
-                .language(movieDto.getLanguage())
-                .build();
+        existingMovie.setTitle(movieDto.getTitle());
+        existingMovie.setDescription(movieDto.getDescription());
+        existingMovie.setDuration(movieDto.getDuration());
+        existingMovie.setGenre(movieDto.getGenre());
+        existingMovie.setReleaseDate(movieDto.getReleaseDate());
+        existingMovie.setLanguage(movieDto.getLanguage());
 
-        return movieRepository.save(updatedMovie);
+        return movieRepository.save(existingMovie);
     }
 
 

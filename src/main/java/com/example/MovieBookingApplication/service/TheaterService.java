@@ -38,17 +38,14 @@ public class TheaterService {
     public Theater updateTheater(Long id, TheaterDto theaterDto) {
 
         Theater existingTheater = theaterRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(" Not found Theater of ID " + id));
+                .orElseThrow(() -> new RuntimeException("Theater not found for ID " + id));
 
-        Theater updatedTheater = Theater.builder()
-                .id(id)
-                .name(existingTheater.getName())
-                .location(existingTheater.getLocation())
-                .capacity(existingTheater.getCapacity())
-                .screenType(existingTheater.getScreenType())
-                .build();
+        existingTheater.setName(theaterDto.getName());
+        existingTheater.setLocation(theaterDto.getLocation());
+        existingTheater.setCapacity(theaterDto.getCapacity());
+        existingTheater.setScreenType(theaterDto.getScreenType());
 
-        return theaterRepository.save(updatedTheater);
+        return theaterRepository.save(existingTheater);
     }
 
     public void deleteTheater(Long id) {
