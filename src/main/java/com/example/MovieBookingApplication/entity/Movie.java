@@ -31,6 +31,6 @@ public class Movie {
     private String language;
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
-    @JsonIgnore(value = true)
+    @JsonIgnore
     private List<Show> show;
 }

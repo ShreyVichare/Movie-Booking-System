@@ -17,45 +17,45 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @PostMapping("/addMovie")
+    @PostMapping("/add-movie")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Movie> addMovie(@RequestBody MovieDto movieDto) {
 
         return ResponseEntity.ok(movieService.addMovie(movieDto));
     }
 
-    @GetMapping("/getAllMovies")
+    @GetMapping("/get-all-movies")
     public ResponseEntity<List<Movie>> getAllMovie() {
 
         return ResponseEntity.ok(movieService.getAllMovie());
     }
 
-    @GetMapping("/getMoviesByGenre")
+    @GetMapping("/get-movies-by-genre")
     public ResponseEntity<List<Movie>> getMovieByGenre(@RequestParam String genre) {
 
         return ResponseEntity.ok(movieService.getMoviesByGenre(genre));
     }
 
-    @GetMapping("/getMoviesByLanguage")
+    @GetMapping("/get-movies-by-language")
     public ResponseEntity<List<Movie>> getMovieByLanguage(@RequestParam String language) {
 
         return ResponseEntity.ok(movieService.getMoviesByLanguage(language));
     }
 
-    @GetMapping("/getMovieByTitle")
+    @GetMapping("/get-movie-by-title")
     public ResponseEntity<List<Movie>> getMovieByTitle(@RequestParam String title) {
 
         return ResponseEntity.ok(movieService.getMovieByTitle(title));
     }
 
-    @PutMapping("/updateMovie/{id}")
+    @PutMapping("/update-movie/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody MovieDto movieDto) {
 
         return ResponseEntity.ok(movieService.updateMovie(id, movieDto));
     }
 
-    @DeleteMapping("/deleteMovie/{id}")
+    @DeleteMapping("/delete-movie/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
 
